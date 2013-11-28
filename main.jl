@@ -89,24 +89,33 @@ for nu in nu_0
   end
   i=i+1;
 end
+println(ftle)
 elapsed_time=toq()
 @printf("\nelapsed time = %.2f s\n",elapsed_time)
-println(ftle)
 
-# Save
-using MAT
-file = matopen("ftle.mat", "w")
-write(file, "ftle", ftle)
-write(file,"nu_0",nu_0)
-write(file,"v_0",v_0)
-close(file)
+
+# # Save
+# using MAT
+# file = matopen("ftle.mat", "w")
+# write(file, "ftle", ftle)
+# write(file,"nu_0",nu_0)
+# write(file,"v_0",v_0)
+# close(file)
 
 # Try to plot in MATLAB
 using MATLAB
 println("Opening a MATLAB session... It may require some time.")
 restart_default_msession()   # Open a default MATLAB session
 
-@matlab load(ftle)              # put x to MATLAB's workspace
-@matlab pcolor(nu_0,v_0,ftle);shading flat  # evaluate a MATLAB function
-
+# @mput nu_0
+# @mput v_0
+# @mput ftle
+eval_string("load('ftle.mat')")
+eval_string("pcolor(nu_0,v_0,ftle); shading flat")
+#@matlab (shading flat)  # evaluate a MATLAB function
+println("Posso chiudere MATLAB? [s]/n")
+a=chomp(readline(STDIN))
+# if a=="s"
+#  close_default_msession()
+# end
 close_default_msession()    # close the default session (optional)
