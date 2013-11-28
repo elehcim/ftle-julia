@@ -1,6 +1,5 @@
 using ODE
 using Datetime
-using MAT
 
 include("FtleMod.jl")
 
@@ -95,6 +94,19 @@ elapsed_time=toq()
 println(ftle)
 
 # Save
+using MAT
 file = matopen("ftle.mat", "w")
 write(file, "ftle", ftle)
+write(file,"nu_0",nu_0)
+write(file,"v_0",v_0)
 close(file)
+
+# Try to plot in MATLAB
+using MATLAB
+println("Opening a MATLAB session... It may require some time.")
+restart_default_msession()   # Open a default MATLAB session
+
+@matlab load(ftle)              # put x to MATLAB's workspace
+@matlab pcolor(nu_0,v_0,ftle);shading flat  # evaluate a MATLAB function
+
+close_default_msession()    # close the default session (optional)
