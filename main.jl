@@ -107,10 +107,10 @@ using MATLAB
 println("Opening a MATLAB session... It may require some time.")
 restart_default_msession()   # Open a default MATLAB session
 
-# @mput nu_0
-# @mput v_0
-# @mput ftle
-eval_string("load('ftle.mat')")
+@mput nu_0
+@mput v_0
+@mput ftle
+# eval_string("load('ftle.mat')")
 eval_string("pcolor(nu_0,v_0,ftle); shading flat")
 #@matlab (shading flat)  # evaluate a MATLAB function
 println("Posso chiudere MATLAB? [s]/n")
