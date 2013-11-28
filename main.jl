@@ -1,5 +1,6 @@
 using ODE
 using Datetime
+using MAT
 
 include("FtleMod.jl")
 
@@ -33,7 +34,7 @@ tic()
 for nu in nu_0
   j=1
   for v in v_0
-    @printf("\r %3.1f%% -- integrating (%2i,%2i)  nu=%4.3f v=%4.3f",(i*n_v+(j-1))/(n_nu*n_v)*100,i,j,nu,v)
+    @printf("\r %3.1f%% -- integrating (%2i,%2i)  nu=%4.3f v=%4.3f",((i-1)*n_v+(j-1))/(n_nu*n_v)*100,i,j,nu,v)
     (x,y) = nu2xy(nu,R)
     vx = -v*sin(nu)
     vy = v*cos(nu)
