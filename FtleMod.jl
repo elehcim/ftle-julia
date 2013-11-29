@@ -10,7 +10,7 @@ function f_ell(ni::Float64,p::PhasePoint4)
   # FIXME (mu, e) dovrebbero essere inseriti da utente; il problema è che non funziona l'integratore
   const mu=9.537e-4; # FIXME
   const e=0.04839; # FIXME
-  K=1+e*cos(ni);
+  const K=1+e*cos(ni);
   x_prime=p.vx;
   y_prime=p.vy;
   wx_prime=2*p.vy+(p.x-((1-mu)*(p.x+mu))/(((p.x+mu)^2+p.y^2)^(1.5))-(mu*(p.x-1+mu))/(((p.x-1+mu)^2+p.y^2)^(1.5)))/K;
