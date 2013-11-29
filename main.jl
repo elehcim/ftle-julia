@@ -7,7 +7,7 @@ include("FtleMod.jl")
 nu_min = 0
 nu_max = pi/2
 
-n_nu = 50
+n_nu = 30
 
 v_min = 1
 v_max = 5
@@ -89,11 +89,34 @@ for nu in nu_0
   end
   i=i+1;
 end
+println(ftle)
 elapsed_time=toq()
 @printf("\nelapsed time = %.2f s\n",elapsed_time)
-println(ftle)
 
-# Save
-file = matopen("ftle.mat", "w")
-write(file, "ftle", ftle)
-close(file)
+# # Save
+# using MAT
+# file = matopen("ftle.mat", "w")
+# write(file, "ftle", ftle)
+# write(file,"nu_0",nu_0)
+# write(file,"v_0",v_0)
+# close(file)
+
+# Try to plot in MATLAB
+using MATLAB
+println("Opening a MATLAB session... It may require some time.")
+restart_default_msession()   # Open a default MATLAB session
+
+@mput nu_0
+@mput v_0
+@mput ftle
+# eval_string("load('ftle.mat')")
+eval_string("pcolor(nu_0,v_0,ftle); shading flat; colorbar")
+#@matlab (shading flat)  # evaluate a MATLAB function
+println("Posso chiudere MATLAB? [s]/n")
+a=chomp(readline(STDIN))
+# if a=="s"
+#  close_default_msession()
+# end
+#FIXME Forse includere un try-catch?
+close_default_msession()# close the default session (optional)
+println("Closed Matlab session")
