@@ -27,17 +27,17 @@ v_0 = linspace(v_min,v_max,n_v)
 ftle = zeros(n_v,n_nu) #WARN ho cambiato l'ordine delle dimensioni così viene diritta l'immagine (colpa di imagesc)
 dphi = zeros(4,4)
 
-
 dnu_0 = distribute(nu_0)
 dv_0 = distribute(v_0)
 dftle = distribute(ftle)
 ## run integration
+
 i = 1
 tic()
 #TODO parallelize @parallel or @pmap
-for nu in nu_0
+for nu in dnu_0
   j=1
-  for v in v_0
+  for v in dv_0
     @printf("\r %3.1f%% -- integrating (%2i,%2i)  nu=%4.3f v=%4.3f",((i-1)*n_v+(j-1))/(n_nu*n_v)*100,i,j,nu,v)
     (x,y) = nu2xy(nu,R)
     vx = -v*sin(nu)
@@ -88,7 +88,7 @@ for nu in nu_0
     dphi[4,3]=(Y_5[end,4]-Y_6[end,4])/(2*dvx)
     dphi[4,4]=(Y_7[end,4]-Y_8[end,4])/(2*dvy)
 #   print(dphi)
-    ftle[j,i]=(1/abs(T))*log(norm(dphi))
+    dftle[j,i]=(1/abs(T))*log(norm(dphi))
 #   println(ftle)
     j=j+1;
   end
