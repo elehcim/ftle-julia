@@ -7,7 +7,7 @@ include("FtleMod.jl")
 nu_min = 0
 nu_max = pi/2
 
-n_nu = 50
+n_nu = 30
 
 v_min = 1
 v_max = 5
@@ -117,5 +117,6 @@ a=chomp(readline(STDIN))
 # if a=="s"
 #  close_default_msession()
 # end
+#FIXME Forse includere un try-catch?
 close_default_msession()# close the default session (optional)
 println("Closed Matlab session")
