@@ -27,6 +27,10 @@ v_0 = linspace(v_min,v_max,n_v)
 ftle = zeros(n_v,n_nu) #WARN ho cambiato l'ordine delle dimensioni così viene diritta l'immagine (colpa di imagesc)
 dphi = zeros(4,4)
 
+
+dnu_0 = distribute(nu_0)
+dv_0 = distribute(v_0)
+dftle = distribute(ftle)
 ## run integration
 i = 1
 tic()
