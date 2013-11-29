@@ -93,7 +93,6 @@ println(ftle)
 elapsed_time=toq()
 @printf("\nelapsed time = %.2f s\n",elapsed_time)
 
-
 # # Save
 # using MAT
 # file = matopen("ftle.mat", "w")
@@ -111,11 +110,12 @@ restart_default_msession()   # Open a default MATLAB session
 @mput v_0
 @mput ftle
 # eval_string("load('ftle.mat')")
-eval_string("pcolor(nu_0,v_0,ftle); shading flat")
+eval_string("pcolor(nu_0,v_0,ftle); shading flat; colorbar")
 #@matlab (shading flat)  # evaluate a MATLAB function
 println("Posso chiudere MATLAB? [s]/n")
 a=chomp(readline(STDIN))
 # if a=="s"
 #  close_default_msession()
 # end
-close_default_msession()    # close the default session (optional)
+close_default_msession()# close the default session (optional)
+println("Closed Matlab session")
