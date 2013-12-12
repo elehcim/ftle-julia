@@ -5,6 +5,18 @@ immutable type PhasePoint4
   vx::Float64
   vy::Float64
 end
+################
+## from here: https://github.com/timholy/HDF5.jl/blob/master/src/plain.jl#L393-L394
+# An empty array type
+type EmptyArray{T}; end
+
+# Stub types to encode fixed-size arrays for H5T_ARRAY
+immutable DimSize{N}; end  # Int-wrapper (can't use tuple of Int as param)
+immutable FixedArray{T,D<:(DimSize...)}; end
+dimsize{N}(::Type{DimSize{N}}) = N
+size{T,D}(::Type{FixedArray{T,D}}) = map(dimsize, D)::(Int...)
+eltype{T,D}(::Type{FixedArray{T,D}}) = T
+################
 
 function f_ell(ni::Float64,p::PhasePoint4)
   # FIXME (mu, e) dovrebbero essere inseriti da utente; il problema è che non funziona l'integratore
